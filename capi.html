@@ -6,19 +6,49 @@
         <meta name="referrer" content="strict-origin-when-cross-origin">
         <title>Čápi</title>
         <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+        <script>
+            const videos = [
+                {name: 'frydlant', id: 'pi_wbYLYN2Q'},
+                {name: 'bohuslavice', id: 'ABJTbc2tOc4'},
+                {name: 'trutnov', id: 'dnPinTdkuxA'},
+                {name: 'mlade_buky', id: '9yUkeT8lCKo'},
+                {name: 'rostejn', id: 'QHj3Jeet_2g'},
+                {name: 'nasavrky', id: '3aOigQLdtPk'},
+            ];
+        </script>
     </head>
     <body class="page">
-        <!-- Frydlant -->
-        <iframe src="https://www.youtube-nocookie.com/embed/pi_wbYLYN2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <!-- Bohuslavice u Trutnova -->
-        <iframe src="https://www.youtube-nocookie.com/embed/ABJTbc2tOc4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <!-- Trutnov -->
-        <iframe src="https://www.youtube-nocookie.com/embed/dnPinTdkuxA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <!-- Mladé Buky -->
-        <iframe src="https://www.youtube-nocookie.com/embed/9yUkeT8lCKo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <!-- Rostejn -->
-        <iframe src="https://www.youtube-nocookie.com/embed/QHj3Jeet_2g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <!-- Nasavrky -->
-        <iframe src="https://www.youtube-nocookie.com/embed/3aOigQLdtPk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <div id="frydlant"></div>
+        <div id="bohuslavice"></div>
+        <div id="trutnov"></div>
+        <div id="mlade_buky"></div>
+        <div id="rostejn"></div>
+        <div id="nasavrky"></div>
+        <script>
+            const yt_script_elem = document.createElement('script');
+            yt_script_elem.src = "https://www.youtube.com/iframe_api";
+            const head_elem = document.querySelector('head');
+            head_elem.appendChild(yt_script_elem);
+
+            yt_script_elem.addEventListener('load', () => {
+                YT.ready(() => {
+                    videos.forEach((video) => {
+                        let player = new YT.Player(video.name, {
+                            videoId: video.id,
+                            host: 'https://www.youtube-nocookie.com',
+                            enablejsapi: 1,
+                            origin: window.location.host,
+                            events: {
+                                'onReady': play_video,
+                            },
+                        });
+                    });
+                });
+            });
+
+            function play_video(event) {
+                event.target.playVideo();
+            }
+        </script>
     </body>
 </html>
