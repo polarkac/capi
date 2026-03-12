@@ -36,8 +36,10 @@
                         let player = new YT.Player(video.name, {
                             videoId: video.id,
                             host: 'https://www.youtube-nocookie.com',
-                            enablejsapi: 1,
-                            origin: window.location.origin,
+                            playerVars: {
+                                enablejsapi: 1,
+                                origin: window.location.origin,
+                            },
                             events: {
                                 'onReady': play_video,
                             },
