@@ -42,6 +42,11 @@
                             },
                             events: {
                                 'onReady': play_video,
+                                'onError': (event) => {
+                                    console.log(event.data);
+                                    console.log(event.target);
+                                    console.log(event.target.getVideoData());
+                                },
                             },
                         });
                     });
