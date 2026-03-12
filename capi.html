@@ -49,6 +49,8 @@
             });
 
             function play_video(event) {
+                const iframe = event.target.getIframe();
+                iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
                 event.target.playVideo();
             }
         </script>
